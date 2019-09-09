@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+
+  redis:
+    image: redis:4.0.10
+    ports:
+      - 6379:6379
+    networks:
+      - ntm_network
+
+  mqtt:
+    image: eclipse-mosquitto:1.6.2
+    ports:
+      - 1883:1883
+      - 9001:9001
+    networks:
+      - ntm_network
+    volumes:
+      - ./docker/eclipse-mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+networks:
+  ntm_network:
+    name: nodetaskmanager_ntw
